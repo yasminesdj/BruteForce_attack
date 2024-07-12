@@ -4,7 +4,18 @@ import 'dotenv/config';
 
 const API_URL = process.env.API_URL;
 const email = 'sami@gmail.com';
-const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const digits = '0123456789';
+const specials = '!@#$%^&*()_+[]{}|;:,.<>?';
+
+const includeSpecials = true;  // Changez cette valeur à false si vous ne voulez pas inclure les caractères spéciaux
+
+let charset = lowercase + uppercase + digits;
+if (includeSpecials) {
+    charset += specials;
+}
 
 async function bruteForceAttack(password) {
     try {
@@ -45,7 +56,7 @@ function* generatePasswords(maxLength) {
 }
 
 async function main() {
-    const maxLength = 2; // Change this value based on the maximum password length you want to test
+    const maxLength = 2; // Changez cette valeur selon la longueur maximale du mot de passe que vous voulez tester
 
     try {
         for (let password of generatePasswords(maxLength)) {
